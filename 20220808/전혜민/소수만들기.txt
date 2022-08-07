@@ -1,0 +1,32 @@
+import java.util.*;
+
+class Solution {
+    private int[] arr = new int[3];
+    private int result = 0;
+    public int solution(int[] nums) {
+        cal(0, 0, nums);
+        
+        return result;
+    }
+    
+    private void cal(int start, int cnt, int[] nums){
+        if(cnt == 3){
+            int addNum = arr[0] + arr[1] + arr[2];
+            if(isPrime(addNum)){
+               result++; 
+            }
+            return;
+        }
+        for(int i = start; i < nums.length; i++){
+            arr[cnt] = nums[i];
+            cal(i+1, cnt+1, nums);
+        }
+    }
+    
+    private boolean isPrime(int num){
+        for (int i = 2; i < num; i++){
+            if (num % i == 0) return false;
+        }
+        return true;
+    }
+}
