@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class Test2 {
+	static int N, M, result;
+	static int[] newArr = new int[3];
+	static int[] cards;
+	static int min = Integer.MAX_VALUE;
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		N = sc.nextInt();
+		M = sc.nextInt();
+		cards = new int[N];
+		
+		for(int i = 0; i < N; i++) {
+			cards[i] = sc.nextInt();
+		}
+		sol(0,0);
+		System.out.println(result);
+		
+	}
+
+	private static void sol(int start, int cnt) {
+		if(cnt == 3) {
+			int add = newArr[0] + newArr[1] + newArr[2];
+			if(M >= add && min > M-add) {
+				result = add;
+				min = M - add;
+			}
+			return;
+		}
+		for(int i = start; i < N; i++) {
+			newArr[cnt] = cards[i];
+			sol(i+1, cnt+1);
+		}
+	}
+}
