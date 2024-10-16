@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Solution_15684 {
     static int N, M, H;
@@ -9,19 +10,26 @@ public class Solution_15684 {
     static boolean finish = false;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//        String[] split = br.readLine().split(" ");
+//        N = Integer.parseInt(split[0]);
+//        M = Integer.parseInt(split[1]);
+//        H = Integer.parseInt(split[2]);
 
-        String[] split = br.readLine().split(" ");
-        N = Integer.parseInt(split[0]);
-        M = Integer.parseInt(split[1]);
-        H = Integer.parseInt(split[2]);
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+        H = Integer.parseInt(st.nextToken());
 
         map = new int[H+1][N+1];
 
         if(M > 0) {
             for(int i=0; i<M; i++) {
-                split = br.readLine().split(" ");
-                int a = Integer.parseInt(split[0]); // 가로선 위치
-                int b = Integer.parseInt(split[1]); // 세로선 기준, +1로 연결
+//                split = br.readLine().split(" ");
+                st = new StringTokenizer(br.readLine());
+                int a = Integer.parseInt(st.nextToken());
+                int b = Integer.parseInt(st.nextToken());
+//                int a = Integer.parseInt(split[0]); // 가로선 위치
+//                int b = Integer.parseInt(split[1]); // 세로선 기준, +1로 연결
                 map[a][b] = 1; // 1은 오른쪽으로 이동
                 map[a][b+1] = 2; // 2는 왼쪽으로 이동
             }
@@ -29,11 +37,11 @@ public class Solution_15684 {
 
         for(int i=0; i<=3; i++) {
             answer = i;
-            dfs(i, 0);
+            dfs(1, 0);
             if(finish) break;
         }
 
-        System.out.println(finish ? answer : "-1");
+        System.out.println(finish ? answer : -1);
 
     }
     static void dfs(int x, int count) {
@@ -41,8 +49,8 @@ public class Solution_15684 {
         if(answer == count) {
             if(check()) {
                 finish = true;
-                return;
             }
+            return;
         }
 
         for(int i=x; i<H+1; i++) {
